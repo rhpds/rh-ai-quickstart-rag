@@ -11,9 +11,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: {{ .Values.rag.helmRepo }}
-    targetRevision: {{ .Values.rag.chartVersion }}
-    chart: rag
+    repoURL: https://github.com/rh-ai-quickstart/RAG.git
+    targetRevision: main
+    path: deploy/helm/rag
     helm:
       values: |
         # ===================================================================

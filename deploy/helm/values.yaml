@@ -7,10 +7,6 @@ rag:
   # Namespace for RAG deployment
   namespace: rag
 
-  # RAG Helm chart repository (external)
-  helmRepo: https://rh-ai-quickstart.github.io/ai-architecture-charts
-  chartVersion: "0.2.31"
-
   # Enable/disable components
   enableWebsearch: false  # Disabled - no Tavily API key
   enableDatabase: true    # Enabled - vector DB agents (HR, legal, sales)
