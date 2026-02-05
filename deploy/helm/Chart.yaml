@@ -1,0 +1,9 @@
+apiVersion: v2
+name: rag-quickstart
+description: RAG Quickstart - Agentic AI chatbot with vector database and LiteMaaS integration
+type: application
+version: 1.0.0
+appVersion: "0.2.31"
+maintainers:
+  - name: RHDP AI Team
+    email: developer@redhat.com

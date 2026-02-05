@@ -1,0 +1,58 @@
+# RAG Quickstart - Field Sourced Content Configuration
+
+# ============================================================
+# RAG Configuration
+# ============================================================
+rag:
+  # Namespace for RAG deployment
+  namespace: rag
+
+  # RAG Helm chart repository (external)
+  helmRepo: https://rh-ai-quickstart.github.io/ai-architecture-charts
+  chartVersion: "0.2.31"
+
+  # Enable/disable components
+  enableWebsearch: false  # Disabled - no Tavily API key
+  enableDatabase: true    # Enabled - vector DB agents (HR, legal, sales)
+
+  # Sample data ingestion sources
+  sampleData:
+    enabled: true
+    sources:
+      - hr
+      - legal
+      - sales
+      - procurement
+      - techsupport
+
+# ============================================================
+# LiteMaaS Configuration (injected by field content workload)
+# ============================================================
+litemaas:
+  # Set to true automatically by workload if credentials available
+  enabled: false
+
+  # LiteMaaS API details (injected from agnosticd_user_data)
+  apiUrl: ""
+  apiKey: ""
+  model: "granite-3-2-8b-instruct"
+
+# ============================================================
+# PostgreSQL Configuration
+# ============================================================
+database:
+  user: "postgres"
+  password: "rag_password"
+  dbname: "rag_blueprint"
+  host: "pgvector"
+  port: "5432"
+
+# ============================================================
+# Values injected by field content workload (do not modify)
+# ============================================================
+deployer:
+  domain: ""
+  apiUrl: ""
+
+fieldContent:
+  deploymentType: "helm"
