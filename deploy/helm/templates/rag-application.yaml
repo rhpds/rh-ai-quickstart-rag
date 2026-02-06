@@ -66,14 +66,16 @@ spec:
         # ===================================================================
         # Configure Pipeline
         # ===================================================================
+        # DISABLED - Requires OpenShift AI Data Science Pipelines (DSPA CRD)
         configure-pipeline:
-          enabled: true
+          enabled: false
 
         # ===================================================================
         # Document Ingestion Pipelines
         # ===================================================================
+        # DISABLED - Requires OpenShift AI Data Science Pipelines (DSPA CRD)
         ingestion-pipeline:
-          enabled: {{ .Values.rag.enableDatabase }}
+          enabled: false
           serviceAccount:
             create: true
             name: rag-pipeline-notebook
