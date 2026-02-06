@@ -5,12 +5,13 @@
   when: ocp4_workload_field_content_gitops_repo_url == "" or ocp4_workload_field_content_gitops_repo_url is not defined
 
 # ===================================================================
-# Check for LiteMaaS credentials (optional - injected by virtual keys workload)
+# Check for LiteMaaS credentials (optional - set by litellm workload)
 # ===================================================================
+# Litellm workload runs first and sets these variables if enabled
 - name: Check if LiteMaaS credentials are available
   ansible.builtin.set_fact:
-    _litemaas_api_url: "{{ lookup('agnosticd_user_data', 'litellm_api_base_url', default='') }}"
-    _litemaas_api_key: "{{ lookup('agnosticd_user_data', 'litellm_virtual_key', default='') }}"
+    _litemaas_api_url: "{{ litellm_api_base_url | default('') }}"
+    _litemaas_api_key: "{{ litellm_virtual_key | default('') }}"
 
 - name: Set LiteMaaS availability flag
   ansible.builtin.set_fact:
@@ -18,7 +19,10 @@
 
 - name: Debug LiteMaaS credentials status
   ansible.builtin.debug:
-    msg: "LiteMaaS credentials available: {{ _litemaas_available }}"
+    msg: |
+      LiteMaaS credentials available: {{ _litemaas_available }}
+      API URL: {{ _litemaas_api_url if _litemaas_available else 'not set' }}
+      Model: {{ litemaas_model | default('not set') }}
 
 # ===================================================================
 # Build Helm values
