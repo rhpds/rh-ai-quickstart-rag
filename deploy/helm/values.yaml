@@ -31,7 +31,7 @@ litemaas:
   # LiteMaaS API details (injected from agnosticd_user_data)
   apiUrl: ""
   apiKey: ""
-  model: "granite-3-2-8b-instruct"
+  model: "llama-scout-17b"
 
 # ============================================================
 # PostgreSQL Configuration

@@ -12,7 +12,7 @@
   ansible.builtin.set_fact:
     _litemaas_api_url: "{{ ocp4_workload_field_content_litemaas_api_url | default('') }}"
     _litemaas_api_key: "{{ ocp4_workload_field_content_litemaas_api_key | default('') }}"
-    _litemaas_model: "{{ ocp4_workload_field_content_litemaas_model | default('granite-3-2-8b-instruct') }}"
+    _litemaas_model: "{{ ocp4_workload_field_content_litemaas_model | default('llama-scout-17b') }}"
 
 - name: Set LiteMaaS availability flag
   ansible.builtin.set_fact:
