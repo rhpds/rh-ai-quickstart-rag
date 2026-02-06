@@ -50,10 +50,5 @@ deployer:
   domain: ""
   apiUrl: ""
 
-gitops:
-  repoURL: "https://github.com/rhpds/rh-ai-quickstart-rag.git"
-  revision: "add-field-sourced-helm-chart"
-  path: "deploy/helm"
-
 fieldContent:
   deploymentType: "helm"
