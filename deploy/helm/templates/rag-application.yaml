@@ -36,6 +36,19 @@ spec:
             {{- end }}
 
         # ===================================================================
+        # LLM Service Configuration
+        # ===================================================================
+        {{- if .Values.litemaas.enabled }}
+        # Disable local LLM service when using remote LiteMaaS
+        llm-service:
+          enabled: false
+        {{- else }}
+        # Local LLM service configuration (user must provide HF token)
+        llm-service:
+          enabled: false  # Disabled by default - requires GPU and HF token
+        {{- end }}
+
+        # ===================================================================
         # Llama Stack Configuration
         # ===================================================================
         llama-stack:
