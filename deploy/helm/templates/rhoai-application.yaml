@@ -24,11 +24,9 @@ spec:
         datasciencecluster:
           apiVersion: datasciencecluster.opendatahub.io/v1
           components:
-            # Data Science Pipelines - Disabled (has Argo Workflows dependency issues)
+            # Data Science Pipelines - Required for RAG ingestion pipelines
             aipipelines:
-              argoWorkflowsControllers:
-                managementState: Removed
-              managementState: Removed
+              managementState: Managed
             dashboard:
               managementState: Managed
             feastoperator:

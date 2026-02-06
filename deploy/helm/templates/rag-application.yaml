@@ -51,10 +51,10 @@ spec:
           enabled: {{ .Values.rag.enableDatabase }}
 
         # ===================================================================
-        # Configure Pipeline (DSPA dependency - must be disabled)
+        # Configure Pipeline
         # ===================================================================
         configure-pipeline:
-          enabled: false
+          enabled: true
 
         # ===================================================================
         # Document Ingestion Pipelines
