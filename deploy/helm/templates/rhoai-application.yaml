@@ -1,0 +1,66 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rhoai
+  namespace: openshift-gitops
+  labels:
+    demo.redhat.com/application: "rag-quickstart-rhoai"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rhpds/ocp-cluster-addons
+    targetRevision: main
+    path: rhoai
+    helm:
+      values: |
+        operator:
+          channel: fast-3.x
+          startingCSV: rhods-operator.3.2.0
+          installPlanApproval: Manual
+        datasciencecluster:
+          apiVersion: datasciencecluster.opendatahub.io/v2
+          components:
+            # Data Science Pipelines - Required for RAG ingestion pipelines
+            aipipelines:
+              argoWorkflowsControllers:
+                managementState: Removed
+              managementState: Managed
+            dashboard:
+              managementState: Managed
+            feastoperator:
+              managementState: Removed
+            # KServe - Required for model serving
+            kserve:
+              managementState: Managed
+            kueue:
+              managementState: Removed
+            llamastackoperator:
+              managementState: Removed
+            modelregistry:
+              managementState: Removed
+            ray:
+              managementState: Removed
+            trainingoperator:
+              managementState: Removed
+            trustyai:
+              managementState: Removed
+            # Workbenches - Required for Jupyter notebooks
+            workbenches:
+              managementState: Managed
+        patcher:
+          dashboard:
+            replicas: 1
+          route: {{ .Values.deployer.domain }}
+        helper-status-checker:
+          approver: true
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
