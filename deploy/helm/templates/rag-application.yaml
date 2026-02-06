@@ -6,6 +6,8 @@ metadata:
   namespace: openshift-gitops
   labels:
     demo.redhat.com/application: "rag-quickstart"
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:

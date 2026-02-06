@@ -6,6 +6,8 @@ metadata:
   namespace: openshift-gitops
   labels:
     demo.redhat.com/application: "rag-quickstart-rhoai"
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
