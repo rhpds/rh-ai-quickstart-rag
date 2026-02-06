@@ -13,8 +13,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/rh-ai-quickstart/RAG.git
-    targetRevision: main
+    repoURL: {{ .Values.gitops.repoURL }}
+    targetRevision: {{ .Values.gitops.revision }}
     path: deploy/helm/rag
     helm:
       values: |
