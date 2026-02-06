@@ -73,25 +73,10 @@ spec:
         # ===================================================================
         # Configure Pipeline
         # ===================================================================
-        # Enable MinIO for document storage, disable Notebook (requires DSPA)
+        # DISABLED - Requires OpenShift AI Data Science Pipelines (DSPA CRD)
+        # Even with notebook disabled, this chart requires DSPA resources
         configure-pipeline:
-          enabled: true
-          notebook:
-            enabled: false
-          minio:
-            secret:
-              user: minio_rag_user
-              password: minio_rag_password
-              host: minio
-              port: "9000"
-            sampleFileUpload:
-              enabled: true
-              bucket: documents
-              urls:
-                - https://raw.githubusercontent.com/rh-ai-quickstart/RAG/refs/heads/main/notebooks/hr/FantaCo-Fabulous-HR-Benefits.pdf
-                - https://raw.githubusercontent.com/rh-ai-quickstart/RAG/refs/heads/main/notebooks/legal/FantaCo-Enterprise-Contract-Reviewer-Analyst-Policy-Procedure-Manual.pdf
-                - https://raw.githubusercontent.com/rh-ai-quickstart/RAG/refs/heads/main/notebooks/sales/FantaCo-Sales-Operations-Manual.pdf
-                - https://raw.githubusercontent.com/rh-ai-quickstart/RAG/refs/heads/main/notebooks/procurement/FantaCo-Procurement.pdf
+          enabled: false
 
         # ===================================================================
         # Document Ingestion Pipelines
