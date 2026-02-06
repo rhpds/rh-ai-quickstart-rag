@@ -9,7 +9,7 @@ rag:
 
   # Enable/disable components
   enableWebsearch: false  # Disabled - no Tavily API key
-  enableDatabase: false   # Disabled - requires Data Science Pipelines CRDs
+  enableDatabase: true    # Enabled - pgvector doesn't require OpenShift AI
 
   # Sample data ingestion sources
   sampleData:
