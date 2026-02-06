@@ -21,7 +21,7 @@ spec:
         operator:
           channel: fast-3.x
           startingCSV: rhods-operator.3.2.0
-          installPlanApproval: Manual
+          installPlanApproval: Automatic
         datasciencecluster:
           apiVersion: datasciencecluster.opendatahub.io/v2
           components:
