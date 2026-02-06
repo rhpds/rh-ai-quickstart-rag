@@ -55,7 +55,7 @@ spec:
         patcher:
           dashboard:
             replicas: 1
-          route: {{ .Values.deployer.domain }}
+          route: false
         helper-status-checker:
           approver: true
   destination:
