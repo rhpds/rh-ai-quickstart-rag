@@ -19,7 +19,7 @@ spec:
     helm:
       values: |
         operator:
-          channel: fast
+          channel: stable
           installPlanApproval: Automatic
         datasciencecluster:
           apiVersion: datasciencecluster.opendatahub.io/v1
