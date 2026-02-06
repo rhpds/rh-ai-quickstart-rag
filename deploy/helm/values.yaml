@@ -9,7 +9,7 @@ rag:
 
   # Enable/disable components
   enableWebsearch: false  # Disabled - no Tavily API key
-  enableDatabase: true    # Enabled - vector DB agents (HR, legal, sales)
+  enableDatabase: false   # Disabled - requires Data Science Pipelines CRDs
 
   # Sample data ingestion sources
   sampleData:
