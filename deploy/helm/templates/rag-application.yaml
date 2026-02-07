@@ -82,6 +82,17 @@ spec:
           serviceAccount:
             create: true
             name: rag-pipeline-notebook
+          pipelines:
+            hr-pipeline:
+              enabled: false
+            legal-pipeline:
+              enabled: false
+            sales-pipeline:
+              enabled: false
+            procurement-pipeline:
+              enabled: false
+            techsupport-pipeline:
+              enabled: false
 
         # ===================================================================
         # RAG UI Configuration
