@@ -1,0 +1,98 @@
+{{- if .Values.rag.enableDatabase }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pipeline-registrar
+  namespace: openshift-gitops
+  labels:
+    demo.redhat.com/application: "rag-quickstart"
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rhpds/rh-ai-quickstart-rag.git
+    targetRevision: main
+    path: deploy/pipeline-registrar
+    helm:
+      values: |
+        ingestionService: "rag-stack-ingestion-pipeline"
+        pipelines:
+          {{- if has "hr" .Values.rag.sampleData.sources }}
+          - name: hr-vector-db-v1-0
+            body:
+              branch: main
+              embedding_model: "all-MiniLM-L6-v2"
+              name: "hr-vector-db"
+              path: "notebooks/hr"
+              source: "GITHUB"
+              token: "auth_token"
+              url: "https://github.com/rh-ai-quickstart/RAG.git"
+              vector_store_name: "hr-vector-db-v1-0"
+              version: "1.0"
+          {{- end }}
+          {{- if has "legal" .Values.rag.sampleData.sources }}
+          - name: legal-vector-db-v1-0
+            body:
+              branch: main
+              embedding_model: "all-MiniLM-L6-v2"
+              name: "legal-vector-db"
+              path: "notebooks/legal"
+              source: "GITHUB"
+              token: "auth_token"
+              url: "https://github.com/rh-ai-quickstart/RAG.git"
+              vector_store_name: "legal-vector-db-v1-0"
+              version: "1.0"
+          {{- end }}
+          {{- if has "sales" .Values.rag.sampleData.sources }}
+          - name: sales-vector-db-v1-0
+            body:
+              branch: main
+              embedding_model: "all-MiniLM-L6-v2"
+              name: "sales-vector-db"
+              path: "notebooks/sales"
+              source: "GITHUB"
+              token: "auth_token"
+              url: "https://github.com/rh-ai-quickstart/RAG.git"
+              vector_store_name: "sales-vector-db-v1-0"
+              version: "1.0"
+          {{- end }}
+          {{- if has "procurement" .Values.rag.sampleData.sources }}
+          - name: procurement-vector-db-v1-0
+            body:
+              branch: main
+              embedding_model: "all-MiniLM-L6-v2"
+              name: "procurement-vector-db"
+              path: "notebooks/procurement"
+              source: "GITHUB"
+              token: "auth_token"
+              url: "https://github.com/rh-ai-quickstart/RAG.git"
+              vector_store_name: "procurement-vector-db-v1-0"
+              version: "1.0"
+          {{- end }}
+          {{- if has "techsupport" .Values.rag.sampleData.sources }}
+          - name: techsupport-vector-db-v1-0
+            body:
+              branch: main
+              embedding_model: "all-MiniLM-L6-v2"
+              name: "techsupport-vector-db"
+              path: "notebooks/techsupport"
+              source: "GITHUB"
+              token: "auth_token"
+              url: "https://github.com/rh-ai-quickstart/RAG.git"
+              vector_store_name: "techsupport-vector-db-v1-0"
+              version: "1.0"
+          {{- end }}
+  destination:
+    namespace: {{ .Values.rag.namespace }}
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}
