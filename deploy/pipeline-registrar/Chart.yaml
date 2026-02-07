@@ -1,5 +1,0 @@
-apiVersion: v2
-name: pipeline-registrar
-description: Sequential pipeline registration for RAG ingestion
-type: application
-version: 1.0.0
