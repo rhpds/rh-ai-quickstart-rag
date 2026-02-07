@@ -56,6 +56,24 @@ spec:
           secrets:
             # Tavily websearch disabled (no API key)
             TAVILY_SEARCH_API_KEY: ""
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - "curl -sf -X POST http://localhost:8321/v1/inference/embeddings -H 'Content-Type: application/json' -d '{\"model_id\":\"sentence-transformers/all-MiniLM-L6-v2\",\"contents\":[\"health check\"]}' > /dev/null"
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 15
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /v1/models
+              port: 8321
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
 
         # ===================================================================
         # PostgreSQL Vector Database
