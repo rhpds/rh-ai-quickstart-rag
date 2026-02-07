@@ -72,82 +72,26 @@ spec:
         # ===================================================================
         # Document Ingestion Pipelines
         # ===================================================================
+        # Upstream pipeline jobs disabled - they run concurrently and hit
+        # a KFP SDK race condition. Pipeline registration is handled by
+        # the pipeline-registrar ArgoCD Application (sync-wave 20) which
+        # registers pipelines sequentially with retry logic.
         ingestion-pipeline:
           enabled: {{ .Values.rag.enableDatabase }}
           serviceAccount:
             create: true
             name: rag-pipeline-notebook
           pipelines:
-            {{- if has "hr" .Values.rag.sampleData.sources }}
             hr-pipeline:
-              enabled: true
-              source: GITHUB
-              embedding_model: "all-MiniLM-L6-v2"
-              name: "hr-vector-db"
-              version: "1.0"
-              vector_store_name: "hr-vector-db-v1-0"
-              GITHUB:
-                url: https://github.com/rh-ai-quickstart/RAG.git
-                path: notebooks/hr
-                token: auth_token
-                branch: main
-            {{- end }}
-            {{- if has "legal" .Values.rag.sampleData.sources }}
+              enabled: false
             legal-pipeline:
-              enabled: true
-              source: GITHUB
-              embedding_model: "all-MiniLM-L6-v2"
-              name: "legal-vector-db"
-              version: "1.0"
-              vector_store_name: "legal-vector-db-v1-0"
-              GITHUB:
-                url: https://github.com/rh-ai-quickstart/RAG.git
-                path: notebooks/legal
-                token: auth_token
-                branch: main
-            {{- end }}
-            {{- if has "sales" .Values.rag.sampleData.sources }}
+              enabled: false
             sales-pipeline:
-              enabled: true
-              source: GITHUB
-              embedding_model: "all-MiniLM-L6-v2"
-              name: "sales-vector-db"
-              version: "1.0"
-              vector_store_name: "sales-vector-db-v1-0"
-              GITHUB:
-                url: https://github.com/rh-ai-quickstart/RAG.git
-                path: notebooks/sales
-                token: auth_token
-                branch: main
-            {{- end }}
-            {{- if has "procurement" .Values.rag.sampleData.sources }}
+              enabled: false
             procurement-pipeline:
-              enabled: true
-              source: GITHUB
-              embedding_model: "all-MiniLM-L6-v2"
-              name: "procurement-vector-db"
-              version: "1.0"
-              vector_store_name: "procurement-vector-db-v1-0"
-              GITHUB:
-                url: https://github.com/rh-ai-quickstart/RAG.git
-                path: notebooks/procurement
-                token: auth_token
-                branch: main
-            {{- end }}
-            {{- if has "techsupport" .Values.rag.sampleData.sources }}
+              enabled: false
             techsupport-pipeline:
-              enabled: true
-              source: GITHUB
-              embedding_model: "all-MiniLM-L6-v2"
-              name: "techsupport-vector-db"
-              version: "1.0"
-              vector_store_name: "techsupport-vector-db-v1-0"
-              GITHUB:
-                url: https://github.com/rh-ai-quickstart/RAG.git
-                path: notebooks/techsupport
-                token: auth_token
-                branch: main
-            {{- end }}
+              enabled: false
 
         # ===================================================================
         # RAG UI Configuration
