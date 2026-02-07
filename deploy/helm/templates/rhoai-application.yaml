@@ -19,24 +19,20 @@ spec:
     helm:
       values: |
         operator:
-          channel: stable
-          installPlanApproval: Automatic
+          channel: fast-3.x
+          startingCSV: rhods-operator.3.2.0
+          installPlanApproval: Manual
         datasciencecluster:
-          apiVersion: datasciencecluster.opendatahub.io/v1
+          apiVersion: datasciencecluster.opendatahub.io/v2
           components:
             # Data Science Pipelines - Required for RAG ingestion pipelines
-            # Note: RHOAI 2.x uses 'datasciencepipelines', 3.x uses 'aipipelines'
-            # We set both for compatibility across versions
-            datasciencepipelines:
-              managementState: Managed
             aipipelines:
               managementState: Managed
             dashboard:
               managementState: Managed
             feastoperator:
               managementState: Removed
-            # KServe disabled - requires ServiceMesh + Serverless operators
-            # Not needed when using remote LLM via LiteMaaS
+            # KServe disabled - not needed when using remote LLM via LiteMaaS
             kserve:
               managementState: Removed
             kueue:
