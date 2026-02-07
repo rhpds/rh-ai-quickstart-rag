@@ -25,15 +25,20 @@ spec:
           apiVersion: datasciencecluster.opendatahub.io/v1
           components:
             # Data Science Pipelines - Required for RAG ingestion pipelines
+            # Note: RHOAI 2.x uses 'datasciencepipelines', 3.x uses 'aipipelines'
+            # We set both for compatibility across versions
+            datasciencepipelines:
+              managementState: Managed
             aipipelines:
               managementState: Managed
             dashboard:
               managementState: Managed
             feastoperator:
               managementState: Removed
-            # KServe - Required for model serving
+            # KServe disabled - requires ServiceMesh + Serverless operators
+            # Not needed when using remote LLM via LiteMaaS
             kserve:
-              managementState: Managed
+              managementState: Removed
             kueue:
               managementState: Removed
             llamastackoperator:
